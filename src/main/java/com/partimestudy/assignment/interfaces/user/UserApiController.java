@@ -1,5 +1,6 @@
 package com.partimestudy.assignment.interfaces.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,6 @@ public class UserApiController implements UserApiControllerDocs {
         UserCommand command = mapper.of(request);
         UserInfo info = userFacade.signup(command);
         UserDto.SignupResponse response = mapper.of(info);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
