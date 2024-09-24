@@ -1,4 +1,4 @@
-package com.partimestudy.infrastructure.common.properties;
+package com.partimestudy.assignment.infrastructure.common.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

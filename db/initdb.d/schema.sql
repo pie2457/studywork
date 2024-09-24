@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users
     password   varchar(256)                         not null comment '비밀번호',
     name       varchar(20)                          not null comment '사용자명',
     salt       varchar(50)                          not null comment '암호화 salt 값',
-    purpose    varchar(10)                          not null comment '공부 목표',
+    purpose    varchar(25)                          not null comment '공부 목표',
     created_at datetime default CURRENT_TIMESTAMP() not null comment '생성일시'
 ) comment 'users' charset = utf8mb4;
 

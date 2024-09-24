@@ -1,8 +1,13 @@
 package com.partimestudy.assignment.domain.user;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import org.springframework.data.annotation.CreatedDate;
+
+import com.partimestudy.assignment.domain.exception.BadRequestException;
+import com.partimestudy.assignment.domain.exception.ErrorCode;
+import com.partimestudy.assignment.infrastructure.common.util.TokenGenerator;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +54,23 @@ public class User {
         ETC("기타");
 
         private final String content;
+
+        public static Purpose from(String purpose) {
+            return Arrays.stream(Purpose.values())
+                .filter(p -> p.content.equals(purpose))
+                .findFirst()
+                .orElseThrow(() -> new BadRequestException(ErrorCode.INVALID_PURPOSE));
+        }
+    }
+
+    @Builder
+    public User(String loginId, String password, Purpose purpose, String name, String salt) {
+        this.userToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_USER);
+        this.loginId = loginId;
+        this.password = password;
+        this.purpose = purpose;
+        this.name = name;
+        this.salt = salt;
+        this.createdAt = LocalDateTime.now();
     }
 }

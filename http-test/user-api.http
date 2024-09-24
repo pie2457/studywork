@@ -1,0 +1,10 @@
+## 회원가입
+POST http://localhost:8080/api/users/signup
+Content-Type: application/json
+
+{
+  "loginId": "bruuni",
+  "password": "qwer1234@",
+  "name": "브루니",
+  "purpose": "공무원"
+}
