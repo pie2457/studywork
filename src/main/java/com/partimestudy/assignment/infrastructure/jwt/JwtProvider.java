@@ -1,4 +1,4 @@
-package com.partimestudy.infrastructure.jwt;
+package com.partimestudy.assignment.infrastructure.jwt;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.partimestudy.assignment.domain.exception.ErrorCode;
 import com.partimestudy.assignment.domain.exception.UnAuthorizedException;
-import com.partimestudy.infrastructure.common.properties.JwtProperties;
+import com.partimestudy.assignment.infrastructure.common.properties.JwtProperties;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
