@@ -18,7 +18,7 @@ import io.jsonwebtoken.security.Keys;
 
 class JwtProviderTest {
     private final String secretKey = "2901ujr9021urf0u902hf021y90fh9c210hg093hg091h3g90h30gh901hg09h01";
-    private final JwtProvider jwtProvider = new JwtProvider(new JwtProperties(secretKey, 10000, 100000));
+    private final JwtProvider jwtProvider = new JwtProvider(new JwtProperties(secretKey, 10000));
 
     @DisplayName("회원의 PK가 payload로 주어지면 엑세스 토큰이 생성되는데 성공한다.")
     @Test
