@@ -1,4 +1,4 @@
-package com.partimestudy.infrastructure.jwt;
+package com.partimestudy.assignment.infrastructure.jwt;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import com.partimestudy.assignment.domain.exception.ErrorCode;
 import com.partimestudy.assignment.domain.exception.UnAuthorizedException;
 import com.partimestudy.assignment.infrastructure.common.properties.JwtProperties;
-import com.partimestudy.assignment.infrastructure.jwt.JwtProvider;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
