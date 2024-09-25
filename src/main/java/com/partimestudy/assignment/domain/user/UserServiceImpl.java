@@ -3,7 +3,7 @@ package com.partimestudy.assignment.domain.user;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.partimestudy.assignment.application.encrypt.PasswordEncoder;
+import com.partimestudy.assignment.domain.encrypt.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 
