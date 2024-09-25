@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class UserFacade {
     private final UserService userService;
 
-    public UserInfo signup(UserCommand command) {
+    public UserInfo signup(UserCommand.Signup command) {
         return userService.signup(command);
     }
 }

@@ -28,7 +28,7 @@ class UserServiceImplTest {
     @Test
     void whenSignup_thenSuccess() {
         // given
-        UserCommand command = new UserCommand("id", "password", "name", "공무원");
+        UserCommand.Signup command = new UserCommand.Signup("id", "password", "name", "공무원");
         EncryptedPassword password = new EncryptedPassword("password", "1234");
 
         willDoNothing().given(userReader).checkDuplicationLoginId(command.loginId());
@@ -49,7 +49,7 @@ class UserServiceImplTest {
     @Test
     void givenDuplicatedId_whenSignup_thenThrowsException() {
         // given
-        UserCommand command = new UserCommand("id", "password", "name", "공무원");
+        UserCommand.Signup command = new UserCommand.Signup("id", "password", "name", "공무원");
 
         willThrow(BadRequestException.class).given(userReader).checkDuplicationLoginId(command.loginId());
 

@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserInfo signup(UserCommand command) {
+    public UserInfo signup(UserCommand.Signup command) {
         userReader.checkDuplicationLoginId(command.loginId());
 
         EncryptedPassword encrypted = passwordEncoder.encode(command.password());

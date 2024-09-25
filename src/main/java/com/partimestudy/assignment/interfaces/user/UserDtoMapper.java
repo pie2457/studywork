@@ -13,7 +13,7 @@ import com.partimestudy.assignment.domain.user.UserInfo;
     unmappedTargetPolicy = ReportingPolicy.ERROR
 )
 public interface UserDtoMapper {
-    UserCommand of(UserDto.SignupRequest request);
+    UserCommand.Signup of(UserDto.SignupRequest request);
 
     UserDto.SignupResponse of(UserInfo userInfo);
 }

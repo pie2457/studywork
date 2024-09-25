@@ -24,7 +24,7 @@ public class UserApiController implements UserApiControllerDocs {
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto.SignupResponse> signup(@RequestBody @Valid UserDto.SignupRequest request) {
-        UserCommand command = mapper.of(request);
+        UserCommand.Signup command = mapper.of(request);
         UserInfo info = userFacade.signup(command);
         UserDto.SignupResponse response = mapper.of(info);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
