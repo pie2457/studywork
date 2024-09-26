@@ -1,6 +1,7 @@
 package com.partimestudy.assignment.infrastructure.jwt;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.partimestudy.assignment.domain.exception.UnAuthorizedException;
 import com.partimestudy.assignment.domain.token.TokenProvider;
 import com.partimestudy.assignment.infrastructure.common.properties.JwtProperties;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -54,5 +56,16 @@ public class JwtProvider implements TokenProvider {
         } catch (JwtException e) {
             throw new UnAuthorizedException(ErrorCode.INVALID_TOKEN);
         }
+    }
+
+    @Override
+    public Map<String, Object> extractClaims(String token) {
+        final Claims claims = Jwts.parserBuilder()
+            .setSigningKey(secretKey)
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+
+        return Collections.unmodifiableMap(claims);
     }
 }
