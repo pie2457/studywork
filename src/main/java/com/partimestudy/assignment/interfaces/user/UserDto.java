@@ -62,4 +62,16 @@ public class UserDto {
     ) {
 
     }
+
+    @Schema(title = "내 정보 조회 응답 DTO")
+    public record UserDetailsResponse(
+        @Schema(defaultValue = "로그인 아이디", example = "bruuuni")
+        String loginId,
+        @Schema(defaultValue = "사용자명", example = "두번째호빵")
+        String name,
+        @Schema(defaultValue = "공부 목표", example = "공무원")
+        String purpose
+    ) {
+
+    }
 }

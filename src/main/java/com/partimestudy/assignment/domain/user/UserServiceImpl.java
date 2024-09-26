@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService {
         return new UserInfo(user);
     }
 
+    @Override
+    public UserInfo.Details details(String userToken) {
+        User user = userReader.findByUserToken(userToken);
+        return UserInfo.Details.from(user);
+    }
+
     private void validationUserInfo(User user, UserCommand.Login command) {
         String encrypted = passwordEncoder.encodeWithSalt(command.password(), user.getSalt());
         if (!user.validatePassword(encrypted)) {

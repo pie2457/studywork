@@ -27,4 +27,10 @@ public class UserReaderImpl implements UserReader {
         return userRepository.findByLoginId(loginId)
             .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_USER));
     }
+
+    @Override
+    public User findByUserToken(String userToken) {
+        return userRepository.findByUserToken(userToken)
+            .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_USER));
+    }
 }
