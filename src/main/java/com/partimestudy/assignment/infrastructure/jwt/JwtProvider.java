@@ -50,7 +50,7 @@ public class JwtProvider implements TokenProvider {
             Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
-                .parseClaimsJwt(token);
+                .parseClaimsJws(token);
         } catch (ExpiredJwtException e) {
             throw new UnAuthorizedException(ErrorCode.EXPIRED_TOKEN);
         } catch (JwtException e) {

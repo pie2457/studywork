@@ -96,4 +96,24 @@ class UserServiceImplTest {
         assertThatThrownBy(() -> userService.login(command))
             .isInstanceOf(BadRequestException.class);
     }
+
+    @DisplayName("내 정보 조회에 성공한다.")
+    @Test
+    void whenUserDetails_thenSuccess() {
+        // given
+        String userToken = "userToken";
+
+        User userMock = mock(User.class);
+
+        given(userMock.getLoginId()).willReturn("loginId");
+        given(userMock.getName()).willReturn("name");
+        given(userMock.getPurpose()).willReturn(User.Purpose.PUBLIC_OFFICIAL);
+        given(userReader.findByUserToken(userToken)).willReturn(userMock);
+
+        // when
+        userService.details(userToken);
+
+        // then
+        then(userReader).should(times(1)).findByUserToken(userToken);
+    }
 }

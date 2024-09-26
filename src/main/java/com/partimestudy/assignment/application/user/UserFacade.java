@@ -24,4 +24,8 @@ public class UserFacade {
         UserInfo info = userService.login(command);
         return tokenService.createToken(info);
     }
+
+    public UserInfo.Details details(String userToken) {
+        return userService.details(userToken);
+    }
 }

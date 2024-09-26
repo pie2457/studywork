@@ -21,4 +21,6 @@ public interface UserDtoMapper {
     UserCommand.Login of(UserDto.LoginRequest request);
 
     UserDto.LoginResponse of(TokenInfo info);
+
+    UserDto.UserDetailsResponse of(UserInfo.Details info);
 }
