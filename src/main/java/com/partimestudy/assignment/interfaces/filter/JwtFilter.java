@@ -13,6 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.partimestudy.assignment.domain.exception.ErrorCode;
 import com.partimestudy.assignment.domain.exception.UnAuthorizedException;
 import com.partimestudy.assignment.infrastructure.jwt.JwtProvider;
+import com.partimestudy.assignment.interfaces.support.AuthenticationContext;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,6 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final List<String> excludeUrlPatterns = List.of("/api/users/auth/**");
 
     private final JwtProvider jwtProvider;
+    private final AuthenticationContext authenticationContext;
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
@@ -47,6 +49,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = extractJwt(request)
             .orElseThrow(() -> new UnAuthorizedException(ErrorCode.INVALID_AUTH_HEADER));
         jwtProvider.validateToken(token);
+        authenticationContext.setUserToken(jwtProvider.extractClaims(token));
 
         filterChain.doFilter(request, response);
     }
