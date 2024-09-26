@@ -1,4 +1,4 @@
-## 회원가입
+### 회원가입
 POST http://localhost:8080/api/users/signup
 Content-Type: application/json
 
@@ -8,3 +8,13 @@ Content-Type: application/json
   "name": "브루니",
   "purpose": "공무원"
 }
+
+### 로그인
+POST http://localhost:8080/api/users/login
+Content-Type: application/json
+
+{
+  "loginId": "bruuni",
+  "password": "qwer1234@"
+}
+

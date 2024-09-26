@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.partimestudy.assignment.application.encrypt.PasswordEncoder;
+import com.partimestudy.assignment.domain.encrypt.PasswordEncoder;
 import com.partimestudy.assignment.domain.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,7 +28,7 @@ class UserServiceImplTest {
     @Test
     void whenSignup_thenSuccess() {
         // given
-        UserCommand command = new UserCommand("id", "password", "name", "공무원");
+        UserCommand.Signup command = new UserCommand.Signup("id", "password", "name", "공무원");
         EncryptedPassword password = new EncryptedPassword("password", "1234");
 
         willDoNothing().given(userReader).checkDuplicationLoginId(command.loginId());
@@ -49,12 +49,51 @@ class UserServiceImplTest {
     @Test
     void givenDuplicatedId_whenSignup_thenThrowsException() {
         // given
-        UserCommand command = new UserCommand("id", "password", "name", "공무원");
+        UserCommand.Signup command = new UserCommand.Signup("id", "password", "name", "공무원");
 
         willThrow(BadRequestException.class).given(userReader).checkDuplicationLoginId(command.loginId());
 
         // when & then
         assertThatThrownBy(() -> userService.signup(command))
+            .isInstanceOf(BadRequestException.class);
+    }
+
+    @DisplayName("로그인에 성공한다.")
+    @Test
+    void whenLogin_thenSuccess() {
+        // given
+        UserCommand.Login command = new UserCommand.Login("testId", "testPassword");
+        String encrypted = "encryptedPassword";
+
+        User userMock = mock(User.class);
+        given(userMock.getSalt()).willReturn("salt");
+        given(passwordEncoder.encodeWithSalt(command.password(), userMock.getSalt())).willReturn(encrypted);
+        given(userMock.validatePassword(encrypted)).willReturn(true);
+        given(userReader.findByLoginId(command.loginId())).willReturn(userMock);
+
+        // when
+        userService.login(command);
+
+        // then
+        then(userReader).should(times(1)).findByLoginId(command.loginId());
+        then(userMock).should(times(1)).validatePassword(encrypted);
+    }
+
+    @DisplayName("비밀번호가 일치하지않으면 로그인에 실패한다.")
+    @Test
+    void givenMismatchedPassword_whenLogin_thenThrowsException() {
+        // given
+        UserCommand.Login command = new UserCommand.Login("testId", "testPassword");
+        String notMatchedPassword = "password";
+
+        User userMock = mock(User.class);
+        given(userMock.getSalt()).willReturn("salt");
+        given(userReader.findByLoginId(command.loginId())).willReturn(userMock);
+        given(passwordEncoder.encodeWithSalt(command.password(), userMock.getSalt())).willReturn(notMatchedPassword);
+        given(userMock.validatePassword(notMatchedPassword)).willReturn(false);
+
+        // when & then
+        assertThatThrownBy(() -> userService.login(command))
             .isInstanceOf(BadRequestException.class);
     }
 }

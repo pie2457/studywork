@@ -1,4 +1,4 @@
-package com.partimestudy.assignment.application.encrypt;
+package com.partimestudy.assignment.domain.encrypt;
 
 import com.partimestudy.assignment.domain.user.EncryptedPassword;
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.partimestudy.assignment.application.user.UserFacade;
+import com.partimestudy.assignment.domain.token.TokenInfo;
 import com.partimestudy.assignment.domain.user.UserCommand;
 import com.partimestudy.assignment.domain.user.UserInfo;
 import com.partimestudy.assignment.domain.user.docs.UserApiControllerDocs;
@@ -24,9 +25,17 @@ public class UserApiController implements UserApiControllerDocs {
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto.SignupResponse> signup(@RequestBody @Valid UserDto.SignupRequest request) {
-        UserCommand command = mapper.of(request);
+        UserCommand.Signup command = mapper.of(request);
         UserInfo info = userFacade.signup(command);
         UserDto.SignupResponse response = mapper.of(info);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDto.LoginResponse> login(@RequestBody @Valid UserDto.LoginRequest request) {
+        UserCommand.Login command = mapper.of(request);
+        TokenInfo info = userFacade.login(command);
+        UserDto.LoginResponse response = mapper.of(info);
+        return ResponseEntity.ok().body(response);
     }
 }

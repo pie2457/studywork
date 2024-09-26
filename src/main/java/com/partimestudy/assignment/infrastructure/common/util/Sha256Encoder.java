@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 import org.springframework.stereotype.Component;
 
-import com.partimestudy.assignment.application.encrypt.PasswordEncoder;
+import com.partimestudy.assignment.domain.encrypt.PasswordEncoder;
 import com.partimestudy.assignment.domain.exception.ErrorCode;
 import com.partimestudy.assignment.domain.exception.InternalServerException;
 import com.partimestudy.assignment.domain.user.EncryptedPassword;
