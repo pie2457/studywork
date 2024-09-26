@@ -73,4 +73,8 @@ public class User {
         this.salt = salt;
         this.createdAt = LocalDateTime.now();
     }
+
+    public boolean validatePassword(String password) {
+        return this.password.equals(password);
+    }
 }

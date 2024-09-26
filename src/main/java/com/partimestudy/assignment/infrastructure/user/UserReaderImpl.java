@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 
 import com.partimestudy.assignment.domain.exception.BadRequestException;
 import com.partimestudy.assignment.domain.exception.ErrorCode;
+import com.partimestudy.assignment.domain.exception.NotFoundException;
+import com.partimestudy.assignment.domain.user.User;
 import com.partimestudy.assignment.domain.user.UserReader;
 
 import lombok.RequiredArgsConstructor;
@@ -18,5 +20,11 @@ public class UserReaderImpl implements UserReader {
         if (userRepository.existsByLoginId(loginId)) {
             throw new BadRequestException(ErrorCode.ALREADY_EXIST_ID);
         }
+    }
+
+    @Override
+    public User findByLoginId(String loginId) {
+        return userRepository.findByLoginId(loginId)
+            .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_USER));
     }
 }

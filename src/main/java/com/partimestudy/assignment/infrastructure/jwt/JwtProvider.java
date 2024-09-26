@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.partimestudy.assignment.domain.exception.ErrorCode;
 import com.partimestudy.assignment.domain.exception.UnAuthorizedException;
+import com.partimestudy.assignment.domain.token.TokenProvider;
 import com.partimestudy.assignment.infrastructure.common.properties.JwtProperties;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -19,7 +20,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
-public class JwtProvider {
+public class JwtProvider implements TokenProvider {
     private final SecretKey secretKey;
     private final long accessTokenExpirationTime;
 
@@ -28,6 +29,7 @@ public class JwtProvider {
         this.accessTokenExpirationTime = properties.accessTokenExpirationTime();
     }
 
+    @Override
     public String createAccessToken(String userToken) {
         Date now = new Date();
         Date accessTokenExpiration = new Date(now.getTime() + accessTokenExpirationTime);
@@ -40,7 +42,8 @@ public class JwtProvider {
             .compact();
     }
 
-    public void validateToken(final String token) {
+    @Override
+    public void validateToken(String token) {
         try {
             Jwts.parserBuilder()
                 .setSigningKey(secretKey)

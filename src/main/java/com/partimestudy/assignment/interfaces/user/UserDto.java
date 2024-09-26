@@ -38,4 +38,28 @@ public class UserDto {
     ) {
 
     }
+
+    @Schema(title = "로그인 요청 DTO")
+    public record LoginRequest(
+        @Schema(defaultValue = "로그인 아이디", example = "bruuuni")
+        @NotBlank(message = "로그인 아이디를 입력해주세요.")
+        @Size(min = 4, max = 10, message = "최소 4자 이상, 10자 이하로 입력해주세요.")
+        String loginId,
+
+        @Schema(defaultValue = "비밀번호", example = "a1s2d3f4!")
+        @NotBlank(message = "비밀번호를 입력해주세요.")
+        @Size(min = 8, max = 15, message = "최소 8자 이상, 15자 이하로 입력해주세요.")
+        @Pattern(regexp = "[a-zA-Z0-9\\W_]{8,15}", message = "영문, 숫자, 특수문자 조합으로 이루어진 8~15자의 비밀번호를 입력해주세요.")
+        String password
+    ) {
+
+    }
+
+    @Schema(title = "로그인 응답 DTO")
+    public record LoginResponse(
+        @Schema(defaultValue = "accessToken", example = "afASFsaFasf.asdWeffrtgt.dsfEOassfEW")
+        String accessToken
+    ) {
+
+    }
 }
