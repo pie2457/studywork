@@ -23,7 +23,7 @@ public class UserApiController implements UserApiControllerDocs {
     private final UserDtoMapper mapper;
     private final UserFacade userFacade;
 
-    @PostMapping("/signup")
+    @PostMapping("/auth/signup")
     public ResponseEntity<UserDto.SignupResponse> signup(@RequestBody @Valid UserDto.SignupRequest request) {
         UserCommand.Signup command = mapper.of(request);
         UserInfo info = userFacade.signup(command);
@@ -31,7 +31,7 @@ public class UserApiController implements UserApiControllerDocs {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<UserDto.LoginResponse> login(@RequestBody @Valid UserDto.LoginRequest request) {
         UserCommand.Login command = mapper.of(request);
         TokenInfo info = userFacade.login(command);
