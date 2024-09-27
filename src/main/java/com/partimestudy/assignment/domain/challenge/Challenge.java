@@ -1,5 +1,8 @@
 package com.partimestudy.assignment.domain.challenge;
 
+import com.partimestudy.assignment.domain.exception.BadRequestException;
+import com.partimestudy.assignment.domain.exception.ErrorCode;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,5 +38,23 @@ public class Challenge {
         INACTIVE("비활성화");
 
         private final String status;
+    }
+
+    public void validateStatus() {
+        if (this.status == Status.INACTIVE) {
+            throw new BadRequestException(ErrorCode.INACTIVE_CHALLENGE);
+        }
+    }
+
+    public void validateDeposit(int deposit) {
+        if (deposit < minDeposit && deposit > maxDeposit) {
+            throw new BadRequestException(ErrorCode.INVALID_DEPOSIT_RANGE);
+        }
+    }
+
+    public void validateName(String name) {
+        if (this.name.equals(name)) {
+            throw new BadRequestException(ErrorCode.INCORRECT_NAME);
+        }
     }
 }
