@@ -19,7 +19,6 @@ public class OrderFacade {
     public OrderInfo.Register register(String userToken, OrderCommand.Register command) {
         Challenge challenge = challengeService.findByChallengeId(command.challengeId());
         challengeValidation(command, challenge);
-        // 결제 ?
         return orderService.register(userToken, command);
     }
 
