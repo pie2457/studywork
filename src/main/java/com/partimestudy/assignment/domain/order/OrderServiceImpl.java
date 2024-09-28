@@ -7,15 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.partimestudy.assignment.domain.exception.BadRequestException;
 import com.partimestudy.assignment.domain.exception.ErrorCode;
+import com.partimestudy.assignment.domain.order.payment.PaymentProcessor;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class OrderServiceImpl implements OrderService {
     private final OrderReader orderReader;
     private final OrderStore orderStore;
+    private final PaymentProcessor paymentProcessor;
 
     @Override
     @Transactional
@@ -29,6 +30,10 @@ public class OrderServiceImpl implements OrderService {
             throw new BadRequestException(ErrorCode.ALREADY_EXIST_CHALLENGE);
         }
         Order order = orderStore.register(command.toEntity(userToken, command));
+        paymentProcessor.pay(
+            order,
+            new OrderCommand.Payment(order.getId(), command.payMethod(), command.deposit())
+        );
         return new OrderInfo.Register(order.getId());
     }
 }

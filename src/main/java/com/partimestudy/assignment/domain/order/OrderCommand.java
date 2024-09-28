@@ -2,6 +2,8 @@ package com.partimestudy.assignment.domain.order;
 
 import java.time.LocalDate;
 
+import com.partimestudy.assignment.domain.order.payment.PayMethod;
+
 public class OrderCommand {
 
     public record Register(
@@ -9,7 +11,8 @@ public class OrderCommand {
         String challengeName,
         int deposit,
         LocalDate startedAt,
-        int studyTime
+        int studyTime,
+        PayMethod payMethod
     ) {
         public Order toEntity(String userToken, OrderCommand.Register command) {
             return Order.builder()
@@ -21,5 +24,13 @@ public class OrderCommand {
                 .studyTime(command.studyTime())
                 .build();
         }
+    }
+
+    public record Payment(
+        Integer orderId,
+        PayMethod payMethod,
+        int deposit
+    ) {
+
     }
 }

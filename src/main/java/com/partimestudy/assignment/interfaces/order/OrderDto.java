@@ -2,6 +2,8 @@ package com.partimestudy.assignment.interfaces.order;
 
 import java.time.LocalDate;
 
+import com.partimestudy.assignment.domain.order.payment.PayMethod;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -26,13 +28,17 @@ public class OrderDto {
         LocalDate startedAt,
         @Positive(message = "공부 시간을 입력해주세요.")
         @Schema(defaultValue = "공부 시간", example = "1")
-        int studyTime
+        int studyTime,
+        @NotNull
+        @Schema(defaultValue = "결제 방법(종류)", example = "NAVER_PAY")
+        PayMethod payMethod
     ) {
 
     }
 
     @Schema(title = "챌린지 주문(신청) 응답 DTO")
     public record RegisterResponse(
+        @Schema(defaultValue = "주문 아이디", example = "1")
         Integer orderId
     ) {
 
