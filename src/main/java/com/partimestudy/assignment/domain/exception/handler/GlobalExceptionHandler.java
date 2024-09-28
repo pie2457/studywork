@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.partimestudy.assignment.domain.exception.BadRequestException;
 import com.partimestudy.assignment.domain.exception.ErrorResponse;
 import com.partimestudy.assignment.domain.exception.InternalServerException;
+import com.partimestudy.assignment.domain.exception.NotFoundException;
 import com.partimestudy.assignment.domain.exception.UnAuthorizedException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleUnAuthorizedException(UnAuthorizedException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), e.getErrorCode().getMessage()));
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getErrorCode().getMessage()));
     }
 
     @ExceptionHandler(value = {Exception.class, InternalServerException.class})

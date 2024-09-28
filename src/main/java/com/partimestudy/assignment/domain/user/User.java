@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.partimestudy.assignment.domain.exception.BadRequestException;
 import com.partimestudy.assignment.domain.exception.ErrorCode;
 import com.partimestudy.assignment.infrastructure.common.util.TokenGenerator;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Getter
 @Table(name = "users")
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
     private static final String PREFIX_USER = "user_";
@@ -71,7 +74,6 @@ public class User {
         this.purpose = purpose;
         this.name = name;
         this.salt = salt;
-        this.createdAt = LocalDateTime.now();
     }
 
     public boolean validatePassword(String password) {
