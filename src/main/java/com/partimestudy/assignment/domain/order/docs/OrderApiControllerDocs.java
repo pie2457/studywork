@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 public interface OrderApiControllerDocs {
     @Operation(summary = "챌린지 주문(신청) 요청", description = "챌린지를 주문(신청)하기 위한 API입니다.")
     @ApiResponse(responseCode = "201", content = @Content(schema = @Schema(implementation = OrderDto.RegisterResponse.class)))
-    public ResponseEntity<OrderDto.RegisterResponse> register(
+    ResponseEntity<OrderDto.RegisterResponse> register(
         @Auth String userToken,
         @RequestBody @Valid OrderDto.RegisterRequest request
     );
