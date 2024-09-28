@@ -53,7 +53,7 @@ public class Challenge {
     }
 
     public void validateName(String name) {
-        if (this.name.equals(name)) {
+        if (!this.name.equals(name)) {
             throw new BadRequestException(ErrorCode.INCORRECT_NAME);
         }
     }
