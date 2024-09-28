@@ -4,9 +4,10 @@ Content-Type: application/json
 Authorization: {{access_token}}
 
 {
-  "challengeId": 2,
+  "challengeId": 3,
   "challengeName": "금요일 1시간 공부하기",
   "deposit": 10000,
-  "startedAt": "2024-09-20",
-  "studyTime": 1
+  "startedAt": "2024-09-30",
+  "studyTime": 1,
+  "payMethod": "NAVER_PAY"
 }
