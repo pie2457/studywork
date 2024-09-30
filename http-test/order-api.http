@@ -11,3 +11,8 @@ Authorization: {{access_token}}
   "studyTime": 1,
   "payMethod": "NAVER_PAY"
 }
+
+### 챌린지 주문(신청) 내역 조회
+GET http://localhost:8080/api/orders/4
+Content-Type: application/json
+Authorization: {{access_token}}
