@@ -142,10 +142,14 @@
 <img width="958" alt="스크린샷 2024-09-30 오후 8 39 00" src="https://github.com/user-attachments/assets/09e50080-9dd6-40df-bed2-1a502d61e44e">
 
 
-## 애플리케이션 Local DB 환경 초기화 
+## 애플리케이션 Local DB 환경 초기화 및 실행
 - docker-compose.yml 파일이 존재하는 경로에서 아래 명령어를 수행해 DB 초기화를 수행합니다.
 ```
 docker-compose up -d
+
+./gradlew clean build
+
+java -jar build/libs/assignment-0.0.1-SNAPSHOT.jar
 ```
 
 ## 구현방향
