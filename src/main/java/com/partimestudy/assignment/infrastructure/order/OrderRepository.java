@@ -33,7 +33,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
         if (challengeName == null) {
             return null;
         }
-        return order.challengeName.like(challengeName);
+        return order.challengeName.contains(challengeName);
     }
 
 }
