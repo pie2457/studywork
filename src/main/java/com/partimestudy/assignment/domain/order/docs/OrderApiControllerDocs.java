@@ -1,6 +1,7 @@
 package com.partimestudy.assignment.domain.order.docs;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.partimestudy.assignment.interfaces.order.OrderDto;
@@ -20,5 +21,12 @@ public interface OrderApiControllerDocs {
     ResponseEntity<OrderDto.RegisterResponse> register(
         @Auth String userToken,
         @RequestBody @Valid OrderDto.RegisterRequest request
+    );
+
+    @Operation(summary = "챌린지 주문(신청) 내역 조회", description = "챌린지의 주문(신청)을 조회하기 위한 API")
+    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = OrderDto.RetrieveResponse.class)))
+    ResponseEntity<OrderDto.RetrieveResponse> retrieve(
+        @Auth String userToken,
+        @PathVariable Integer orderId
     );
 }

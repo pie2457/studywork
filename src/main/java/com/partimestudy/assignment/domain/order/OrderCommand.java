@@ -33,4 +33,11 @@ public class OrderCommand {
     ) {
 
     }
+
+    public record Retrieve(
+        Integer orderId,
+        String userToken
+    ) {
+
+    }
 }

@@ -2,6 +2,8 @@ package com.partimestudy.assignment.interfaces.order;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +34,16 @@ public class OrderApiController implements OrderApiControllerDocs {
         OrderInfo.Register info = orderFacade.register(userToken, command);
         OrderDto.RegisterResponse response = mapper.of(info);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderDto.RetrieveResponse> retrieve(
+        @Auth String userToken,
+        @PathVariable Integer orderId
+    ) {
+        OrderCommand.Retrieve command = mapper.of(orderId, userToken);
+        OrderInfo.Retrieve info = orderFacade.retrieve(command);
+        OrderDto.RetrieveResponse response = mapper.of(info);
+        return ResponseEntity.ok().body(response);
     }
 }

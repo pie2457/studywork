@@ -1,7 +1,9 @@
 package com.partimestudy.assignment.interfaces.order;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.partimestudy.assignment.domain.order.payment.PayMethod;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,6 +42,25 @@ public class OrderDto {
     public record RegisterResponse(
         @Schema(defaultValue = "주문 아이디", example = "1")
         Integer orderId
+    ) {
+
+    }
+
+    @Schema(title = "챌린지 주문(신청) 내역 조회 응답 DTO")
+    public record RetrieveResponse(
+        @Schema(defaultValue = "챌린지 이름", example = "월요일 1시간 공부하기")
+        String challengeName,
+        @Schema(defaultValue = "시작 일자", example = "2024-09-30")
+        LocalDate startedAt,
+        @Schema(defaultValue = "공부 시간", example = "1")
+        Integer studyTime,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+        @Schema(defaultValue = "생성 일자", example = "2024-09-28 17:43")
+        LocalDateTime createdAt,
+        @Schema(defaultValue = "보증금", example = "10000")
+        int deposit,
+        @Schema(defaultValue = "결제 금액", example = "10000")
+        int amount
     ) {
 
     }

@@ -16,4 +16,8 @@ public interface OrderDtoMapper {
     OrderCommand.Register of(OrderDto.RegisterRequest request);
 
     OrderDto.RegisterResponse of(OrderInfo.Register info);
+
+    OrderCommand.Retrieve of(Integer orderId, String userToken);
+
+    OrderDto.RetrieveResponse of(OrderInfo.Retrieve info);
 }

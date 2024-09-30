@@ -36,4 +36,11 @@ public class OrderServiceImpl implements OrderService {
         );
         return new OrderInfo.Register(order.getId());
     }
+
+    @Override
+    public OrderInfo.Retrieve retrieve(OrderCommand.Retrieve command) {
+        Order order = orderReader.findByOrderId(command.orderId());
+        order.validateUserToken(command.userToken());
+        return OrderInfo.Retrieve.from(order);
+    }
 }

@@ -67,4 +67,21 @@ class OrderServiceImplTest {
         // when & then
         assertThatThrownBy(() -> orderService.register(userToken, command)).isInstanceOf(BaseException.class);
     }
+
+    @DisplayName("챌린지 주문(신청) 내역 조회에 성공한다.")
+    @Test
+    void whenRetrieveOrder_thenSuccess() {
+        // given
+        OrderCommand.Retrieve command = new OrderCommand.Retrieve(1, "userToken");
+        Order orderMock = mock(Order.class);
+
+        given(orderReader.findByOrderId(command.orderId())).willReturn(orderMock);
+        willDoNothing().given(orderMock).validateUserToken(command.userToken());
+
+        // when
+        orderService.retrieve(command);
+
+        // then
+        then(orderReader).should(times(1)).findByOrderId(command.orderId());
+    }
 }
