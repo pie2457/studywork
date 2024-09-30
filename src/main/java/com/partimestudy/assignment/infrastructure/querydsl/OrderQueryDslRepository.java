@@ -31,7 +31,7 @@ public class OrderQueryDslRepository {
             .from(order)
             .where(
                 orderRepository.equalUserToken(command.userToken()),
-                orderRepository.equalChallengeName(command.challengeName()),
+                orderRepository.containsChallengeName(command.challengeName()),
                 orderRepository.lessThenDeposit(command.deposit())
             )
             .orderBy(order.createdAt.desc())

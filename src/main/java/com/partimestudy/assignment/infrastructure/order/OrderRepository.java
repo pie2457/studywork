@@ -29,11 +29,11 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
         return order.deposit.lt(deposit);
     }
 
-    default BooleanExpression equalChallengeName(String challengeName) {
+    default BooleanExpression containsChallengeName(String challengeName) {
         if (challengeName == null) {
             return null;
         }
-        return order.challengeName.eq(challengeName);
+        return order.challengeName.like(challengeName);
     }
 
 }
