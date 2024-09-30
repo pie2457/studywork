@@ -31,4 +31,15 @@ public class OrderInfo {
             );
         }
     }
+
+    public record RetrieveAll(
+        String challengeName,
+        LocalDate startedAt,
+        Integer studyTime,
+        LocalDateTime createdAt,
+        int deposit,
+        int amount
+    ) {
+
+    }
 }

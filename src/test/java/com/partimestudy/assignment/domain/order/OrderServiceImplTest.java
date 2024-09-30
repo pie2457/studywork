@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -83,5 +85,29 @@ class OrderServiceImplTest {
 
         // then
         then(orderReader).should(times(1)).findByOrderId(command.orderId());
+    }
+
+    @DisplayName("챌린지 주문(신청) 내역 전체 조회에 성공한다.")
+    @Test
+    void whenRetrieveOrders_thenSuccess() {
+        // given
+        OrderCommand.RetrieveAll command = new OrderCommand.RetrieveAll(
+            "userToken",
+            12000,
+            "원하는 일정으로 공부하기");
+        OrderInfo.RetrieveAll info = mock(OrderInfo.RetrieveAll.class);
+        List<OrderInfo.RetrieveAll> allInfo = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            allInfo.add(info);
+        }
+
+        given(orderReader.findAllOrdersBySearchParams(command)).willReturn(allInfo);
+
+        // when
+        orderService.retrieveAll(command);
+
+        // then
+        then(orderReader).should(times(1)).findAllOrdersBySearchParams(command);
     }
 }

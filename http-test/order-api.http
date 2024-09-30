@@ -4,10 +4,10 @@ Content-Type: application/json
 Authorization: {{access_token}}
 
 {
-  "challengeId": 3,
-  "challengeName": "금요일 1시간 공부하기",
+  "challengeId": 2,
+  "challengeName": "월요일 1시간 공부하기",
   "deposit": 10000,
-  "startedAt": "2024-09-30",
+  "startedAt": "2024-10-14",
   "studyTime": 1,
   "payMethod": "NAVER_PAY"
 }
@@ -16,3 +16,9 @@ Authorization: {{access_token}}
 GET http://localhost:8080/api/orders/4
 Content-Type: application/json
 Authorization: {{access_token}}
+
+### 챌린지 주문(신청) 내역 전체 조회
+GET http://localhost:8080/api/orders
+Content-Type: application/json
+Authorization: {{access_token}}
+

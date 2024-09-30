@@ -20,4 +20,6 @@ public interface OrderDtoMapper {
     OrderCommand.Retrieve of(Integer orderId, String userToken);
 
     OrderDto.RetrieveResponse of(OrderInfo.Retrieve info);
+
+    OrderCommand.RetrieveAll of(String userToken, int deposit, String challengeName);
 }

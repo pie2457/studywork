@@ -1,6 +1,7 @@
 package com.partimestudy.assignment.domain.order;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class OrderServiceImpl implements OrderService {
     private final OrderReader orderReader;
     private final OrderStore orderStore;
@@ -42,5 +44,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderReader.findByOrderId(command.orderId());
         order.validateUserToken(command.userToken());
         return OrderInfo.Retrieve.from(order);
+    }
+
+    @Override
+    public List<OrderInfo.RetrieveAll> retrieveAll(OrderCommand.RetrieveAll command) {
+        return orderReader.findAllOrdersBySearchParams(command);
     }
 }

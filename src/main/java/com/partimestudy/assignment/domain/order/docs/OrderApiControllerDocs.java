@@ -1,8 +1,11 @@
 package com.partimestudy.assignment.domain.order.docs;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.partimestudy.assignment.interfaces.order.OrderDto;
 import com.partimestudy.assignment.interfaces.support.Auth;
@@ -28,5 +31,13 @@ public interface OrderApiControllerDocs {
     ResponseEntity<OrderDto.RetrieveResponse> retrieve(
         @Auth String userToken,
         @PathVariable Integer orderId
+    );
+
+    @Operation(summary = "챌린지 주문(신청) 내역 전체 조회", description = "챌린지의 주문(신청) 내역을 전체 조회하기 위한 API")
+    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = OrderDto.RetrieveAllResponse.class)))
+    ResponseEntity<List<OrderDto.RetrieveAllResponse>> retrieveAll(
+        @Auth String userToken,
+        @RequestParam(required = false, defaultValue = "0") int deposit,
+        @RequestParam(required = false) String challengeName
     );
 }
