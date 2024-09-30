@@ -222,5 +222,5 @@ java -jar build/libs/assignment-0.0.1-SNAPSHOT.jar
 
 ### [챌린지 주문(신청) 내역 전체 조회](http://localhost:8080/swagger-ui/index.html#/%EC%B1%8C%EB%A6%B0%EC%A7%80%20%EC%A3%BC%EB%AC%B8(%EC%8B%A0%EC%B2%AD)%20API/retrieveAll)
 - 챌린지 주문(신청) 내역을 전체 조회하는 기능을 구현했습니다.
-  - querydsl을 이용하여 조건에 맞추어 검색이 가능하도록 구현했습니다.
+  - querydsl을 이용하여 검색어에 맞추어 동적 조회가 가능하도록 구현했습니다.
 - 챌린지 주문(신청) 내역을 전체 조회 기능을 테스트했습니다.
