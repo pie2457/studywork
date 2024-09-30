@@ -26,6 +26,10 @@ public enum ErrorCode {
     EXPIRED_TOKEN("만료된 토큰입니다."),
     INVALID_TOKEN("유효하지 않은 토큰입니다."),
 
+    // ORDER
+    NOT_FOUND_ORDER("해당 주문(신청)을 찾을 수 없습니다."),
+    PERMISSION_DENIED_ORDER("해당 주문(신청)건에 접근할 수 없습니다."),
+
     // PASSWORD
     PASSWORD_ENCRYPTION_FAIL("비밀번호 암호화에 실패했습니다."),
     MISMATCHED_PASSWORD("비밀번호가 일치하지 않습니다."),

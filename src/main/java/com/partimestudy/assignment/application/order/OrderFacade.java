@@ -22,6 +22,10 @@ public class OrderFacade {
         return orderService.register(userToken, command);
     }
 
+    public OrderInfo.Retrieve retrieve(OrderCommand.Retrieve command) {
+        return orderService.retrieve(command);
+    }
+
     private void challengeValidation(OrderCommand.Register command, Challenge challenge) {
         challenge.validateStatus();
         challenge.validateName(command.challengeName());

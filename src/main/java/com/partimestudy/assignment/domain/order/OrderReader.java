@@ -7,4 +7,6 @@ public interface OrderReader {
         String userToken,
         Integer challengeId,
         LocalDate startedAt);
+
+    Order findByOrderId(Integer orderId);
 }
