@@ -40,4 +40,12 @@ public class OrderCommand {
     ) {
 
     }
+
+    public record RetrieveAll(
+        String userToken,
+        int deposit,
+        String challengeName
+    ) {
+
+    }
 }

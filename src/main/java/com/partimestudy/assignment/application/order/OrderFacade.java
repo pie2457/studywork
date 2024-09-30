@@ -1,5 +1,7 @@
 package com.partimestudy.assignment.application.order;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.partimestudy.assignment.domain.challenge.Challenge;
@@ -24,6 +26,10 @@ public class OrderFacade {
 
     public OrderInfo.Retrieve retrieve(OrderCommand.Retrieve command) {
         return orderService.retrieve(command);
+    }
+
+    public List<OrderInfo.RetrieveAll> retrieveAll(OrderCommand.RetrieveAll command) {
+        return orderService.retrieveAll(command);
     }
 
     private void challengeValidation(OrderCommand.Register command, Challenge challenge) {
